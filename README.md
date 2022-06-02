@@ -13,3 +13,5 @@ cd triple-triad-explorer
 bundle install
 bin/rails server
 ```
+
+![Screenshot](https://github.com/mattantonelli/triple-triad-explorer/raw/master/public/screenshot.png)
