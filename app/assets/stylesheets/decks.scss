@@ -1,0 +1,17 @@
+.folder, .deck-contents {
+  margin-left: 2rem;
+}
+
+.folder-name {
+  cursor: pointer;
+
+  // Prevent text highlighting (e.g. double clicks)
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+
+  i {
+    margin-right: 0.25rem;
+  }
+}

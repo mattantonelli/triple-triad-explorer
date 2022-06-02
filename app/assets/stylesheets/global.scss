@@ -1,0 +1,7 @@
+.hidden {
+  display: none !important;
+}
+
+::placeholder, .label-opaque {
+  opacity: 0.65;
+}
