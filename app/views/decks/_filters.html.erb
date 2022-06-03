@@ -1,0 +1,15 @@
+<div class="filters">
+  <div class="filter">
+    <h5>Compatibility</h5>
+    <div class="form-check">
+      <%= check_box_tag :updated, '1', true, class: 'form-check-input', 'data-search-target': 'updated',
+        'data-action': 'search#execute' %>
+      <%= label_tag :updated, 'Updated', class: 'form-check-label' %>
+    </div>
+    <div class="form-check">
+      <%= check_box_tag :outdated, '1', true, class: 'form-check-input', 'data-search-target': 'outdated',
+        'data-action': 'search#execute' %>
+      <%= label_tag :outdated, 'Outdated', class: 'form-check-label' %>
+    </div>
+  </div>
+</div>

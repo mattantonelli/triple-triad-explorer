@@ -1,3 +1,15 @@
+.form-check {
+  input, label {
+    cursor: pointer;
+
+    // Prevent text highlighting (e.g. double clicks)
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+  }
+}
+
 .hidden {
   display: none !important;
 }

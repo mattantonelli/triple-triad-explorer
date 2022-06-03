@@ -1,0 +1,8 @@
+<div class="d-flex align-items-center mb-3">
+  <div class="form-floating me-3">
+    <%= text_field_tag(:search, nil, placeholder: 'Search', size: 50, class: 'form-control', 'data-action': 'search#query',
+                       'data-search-target': 'search' ) %>
+    <%= label_tag(:search, 'Search', class: 'label-opaque') %>
+  </div>
+  <%= button_tag 'Reset', class: 'btn btn-secondary', 'data-action': 'search#reset' %>
+</div>

@@ -1,59 +1,11 @@
-<h3 class="mb-3">Triple Triad Deck Explorer</h3>
-<div data-controller="search">
-  <div class="d-flex align-items-center mb-3">
-    <div class="form-floating me-3">
-      <%= text_field_tag(:search, nil, placeholder: 'Search', size: 50, class: 'form-control', 'data-action': 'search#execute', 'data-search-target': 'search' ) %>
-      <%= label_tag(:search, 'Search', class: 'label-opaque') %>
-    </div>
-    <%= button_tag 'Reset', class: 'btn btn-secondary', 'data-action': 'search#reset' %>
+<div class="row" data-controller="search">
+  <div class="col-2">
+    <%= render 'filters' %>
   </div>
-
-  <p>
-    <b>Total results:</b>
-    <span data-search-target="count"><%= @count %></span>
-  </p>
-
-  <div class="d-flex flex-column" data-search-target="results">
-    <% @decks.keys.sort.each do |type| %>
-      <div class="type folder ms-0" data-controller="folder">
-        <div class="folder-name" data-action="click->folder#toggle">
-          <i class="bi-folder2"></i>
-          <span data-folder-target="name"><%= type %></span>
-        </div>
-        <div class="d-flex flex-column type-contents hidden" data-folder-target="contents">
-          <% @decks[type].keys.sort.each do |name| %>
-            <div class="folder" data-controller="folder">
-              <div class="folder-name" data-action="click->folder#toggle">
-                <i class="bi-folder2"></i>
-                <span data-folder-target="name"><%= name %></span>
-              </div>
-              <div class="d-flex flex-column decks name-contents hidden" data-folder-target="contents">
-                <% @decks[type][name].each do |deck| %>
-                  <div class="deck folder" data-controller="folder">
-                    <div class="folder-name" data-action="click->folder#toggle">
-                      <i class="bi-card-checklist"></i>
-                      <span data-folder-target="name">
-                        Created by <span class="username"><%= deck[:user] %></span> /
-                        Rating: <%= deck[:rating] %> /
-                        <%= deck_updated(deck) %>
-                      </span>
-                    </div>
-                    <div class="d-flex flex-column deck-contents hidden" data-folder-target="contents">
-                      <% deck[:cards].each do |card| %>
-                        <div class="deck-card">
-                          <i class="bi-person-badge"></i>
-                          <span><%= card[:name] %></span>
-                          <%= stars(card[:stars]) %>
-                        </div>
-                      <% end %>
-                    </div>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
-        </div>
-      </div>
-    <% end %>
+  <div class="col-10">
+    <h3 class="mb-3">Triple Triad Deck Explorer</h3>
+    <%= render 'search' %>
+    <%= render 'count' %>
+    <%= render 'results' %>
   </div>
 </div>

@@ -1,23 +1,33 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["search", "count", "results"]
+  static targets = ["updated", "outdated", "search", "count", "results"]
 
-  // Search for decks by matching the search query and toggle as appropriate
+  // Search for decks by matching the search query and filter parameters
   execute() {
+    for (let deck of this.resultsTarget.getElementsByClassName("deck")) {
+      const query = new RegExp(this.searchTarget.value, "i")
+
+      if (this.matchesUpdatedFilters(deck) && deck.innerText.match(query)) {
+        deck.classList.remove("hidden")
+      } else {
+        deck.classList.add("hidden")
+      }
+    }
+
+    this.update()
+  }
+
+  matchesUpdatedFilters(deck) {
+    var isUpdated = deck.dataset.updated === 'true'
+    return (isUpdated && this.updatedTarget.checked) || (!isUpdated && this.outdatedTarget.checked)
+  }
+
+  // Execute the search after a short delay when the query text has been updated
+  query() {
     clearTimeout(this.timeout)
     this.timeout = setTimeout(() => {
-      for (let deck of this.resultsTarget.getElementsByClassName("deck")) {
-        const query = new RegExp(this.searchTarget.value, "i")
-
-        if (deck.innerText.match(query)) {
-          deck.classList.remove("hidden")
-        } else {
-          deck.classList.add("hidden")
-        }
-      }
-
-      this.update()
+      this.execute()
     }, 500)
   }
 
@@ -25,6 +35,8 @@ export default class extends Controller {
   reset(event) {
     event.preventDefault()
     event.target.blur()
+    this.updatedTarget.checked = true
+    this.outdatedTarget.checked = true
     this.searchTarget.value = ""
     Array.from(this.resultsTarget.querySelectorAll(".deck.hidden")).forEach((el) => el.classList.remove("hidden"));
     this.update()
